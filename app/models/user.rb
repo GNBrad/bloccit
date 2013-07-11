@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+
+    mount_uploader :avatar, AvatarUploader
+    
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -11,8 +14,6 @@ class User < ActiveRecord::Base
 
   before_create :set_member
   # attr_accessible :title, :body
-
-  mount_uploader :avatar, AvatarUploader
 
   ROLES = %w[member moderator admin]
   def role?(base_role)
