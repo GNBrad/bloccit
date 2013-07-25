@@ -7,6 +7,7 @@ topics = []
     description: Faker::Lorem.paragraph(rand(1..4))
   )
 end
+  
 
 rand(4..10).times do
   password = Faker::Lorem.characters(10)
@@ -19,7 +20,7 @@ rand(4..10).times do
   u.save
 
   rand(5..12).times do
-    topic = topics.first # getting the first topic here
+    topic = topics.first
     p = u.posts.create(
       topic: topic,
       title: Faker::Lorem.words(rand(1..10)).join(" "), 
@@ -27,22 +28,12 @@ rand(4..10).times do
     # set the created_at to a time within the past year
     p.update_attribute(:created_at, Time.now - rand(600..31536000))
 
-    topics.rotate! # add this line to move the first topic to the last,
+    topics.rotate!
 
     rand(3..7).times do
       p.comments.create(
         body: Faker::Lorem.paragraphs(rand(1..2)).join("\n"))
     end
-  end
-
-post_count = Post.count
-User.all.each do |user|
-  rand(30..50).times do
-    p = Post.find(rand(1..post_count))
-    c = user.comments.create(
-      body: Faker::Lorem.paragraphs(rand(1..2)).join("\n"),
-      post: p)
-    c.update_attribute(:created_at, Time.now - rand(600..31536000))
   end
 end
 
@@ -72,8 +63,8 @@ u = User.new(
 u.skip_confirmation!
 u.save
 
+
 puts "Seed finished"
 puts "#{User.count} users created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
-end
