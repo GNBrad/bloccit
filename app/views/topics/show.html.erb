@@ -28,7 +28,7 @@
   </div>
   <div class="span4">
     <% if can? :create, Post %>
-      <%= link_to "New Post", "#", class: 'btn btn-large btn-block' %>
+      <%= link_to "New Post", new_topic_post_path(@topic), class: 'btn btn-large btn-block' %>
     <% end %>
   </div>
 </div>
