@@ -1,7 +1,7 @@
 <%= form_for [topic, post], html: { class: 'form-horizontal' } do |f| %>
   <% if post.errors.any? %>
     <div class="alert alert-block">
-      <h4>There are <%= pluralize(post.errors.count, "error") %>.</h4>
+      <h4>There are <%= pluralize(post.errors.count, "error") %> errors.</h4>
       <ul>
         <% post.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
@@ -21,7 +21,7 @@
       <%= f.text_area :body, rows: 8 %>
     </div>
   <% end %>
-   <%= control_group_tag(post.errors[:image]) do %>
+  <%= control_group_tag(post.errors[:image]) do %>
     <%= f.label :image, class: 'control-label' %>
     <div class="controls">
       <%= f.file_field :image %>
