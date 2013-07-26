@@ -35,6 +35,8 @@ gem 'mini_magick'
 gem 'fog'
 gem 'figaro'
 gem 'will_paginate', '~> 3.0'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
