@@ -7,7 +7,6 @@ topics = []
     description: Faker::Lorem.paragraph(rand(1..4))
   )
 end
-  
 
 rand(4..10).times do
   password = Faker::Lorem.characters(10)
@@ -28,6 +27,7 @@ rand(4..10).times do
     # set the created_at to a time within the past year
     p.update_attribute(:created_at, Time.now - rand(600..31536000))
 
+    p.update_rank
     topics.rotate!
 
     rand(3..7).times do
