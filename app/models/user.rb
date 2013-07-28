@@ -20,10 +20,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable, :omniauth_providers => [:facebook]
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :avatar, :avatar_cache, :provider, :uid
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :avatar, :avatar_cache, :provider, :uid, :email_favorites
   has_many :posts 
   has_many :comments
   has_many :votes, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   before_create :set_member
   # attr_accessible :title, :body
@@ -31,7 +32,11 @@ class User < ActiveRecord::Base
   ROLES = %w[member moderator admin]
   def role?(base_role)
     role.nil? ? false : ROLES.index(base_role.to_s) <= ROLES.index(role)
-  end  
+  end
+
+  def favorited(post)
+    self.favorites.where(post_id: post.id).first
+  end
 
   private
 
