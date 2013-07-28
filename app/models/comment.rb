@@ -11,7 +11,7 @@ class Comment < ActiveRecord::Base
   private
 
   def send_favorite_emails
-    self.post.favorites.each do |favorite|
+    self.post.favorites.each do |fav|
       if fav.user_id != self.user_id && fav.user.email_favorites?
   		FavoriteMailer.new_comment(fav.user, self.post, self).deliver
 	  end
